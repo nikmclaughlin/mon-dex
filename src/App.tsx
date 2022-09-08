@@ -2,24 +2,19 @@ import './App.css';
 
 import React, { useState } from 'react';
 
-// import logo from './logo.svg';
-
-// const [monList, setMonList] = useState([]);
-
+//Ping PokeAPI for gen1 data
 let response = await fetch('https://pokeapi.co/api/v2/generation/1');
 const gen1Data = response.json();
-// generationData.then((data) => console.log(data.pokemon_species));
-
-const monList: { name: String; url: String }[] = [];
-const nameList: String[] = [];
 
 //Gather PKMN species from response data
+const monList: { name: String; url: String }[] = [];
 gen1Data.then((data) => {
   monList.push(...data.pokemon_species);
 });
 console.log('monList:', monList);
 
 //Gather PKMN names to be rendered in <MonList />
+const nameList: String[] = [];
 // vv NEEDS WORK vv loop is currently running 0 times >:|
 for (const mon of monList) {
   console.log('pushing name: ' + mon.name);
