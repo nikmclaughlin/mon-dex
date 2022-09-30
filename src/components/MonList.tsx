@@ -5,6 +5,8 @@ import { DexData, PokemonEntry } from '../dexTypes';
 const entriesList: PokemonEntry[] = [];
 
 /*/??TODO: Define individual entry as its own component
+* Separates concerns so MonList is only rendering the list
+* I think I also need to do this in order to pull individual stats (height, weight, description, etc.)
 function MonEntry(entryData: PokemonEntry) {
   // const spriteURL: string = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${entryData?.entry_number}.png`;
 
@@ -44,6 +46,8 @@ function MonList() {
       retrievedData = true;
     };
   }, []);
+
+  //TODO: Write Util to capitalize Mon names
 
   return (
     <>
