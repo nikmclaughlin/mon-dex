@@ -1,45 +1,74 @@
 import './App.css';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-//Ping PokeAPI for gen1 data
-let response = await fetch('https://pokeapi.co/api/v2/generation/1');
-const gen1Data = response.json();
+/**
+ * Type def for later:
+ * entries: { entry_number: Number; species: { name: String; url: String } }[];
+ */
 
-//Gather PKMN species from response data
-const monList: { name: String; url: String }[] = [];
-gen1Data.then((data) => {
-  monList.push(...data.pokemon_species);
-});
-console.log('monList:', monList);
-
-//Gather PKMN names to be rendered in <MonList />
-const nameList: String[] = [];
-// vv NEEDS WORK vv loop is currently running 0 times >:|
-for (const mon of monList) {
-  console.log('pushing name: ' + mon.name);
-  nameList.push(mon.name);
+interface ApiObject {
+  name: String;
+  url: String;
 }
 
-const MonList = (props: { names: String[] }) => {
-  const [monNames, setMonNames] = useState<String[]>(props.names);
-  console.log('names:', monNames);
+interface PokemonEntry {
+  entry_number: Number;
+  pokemon_species: ApiObject;
+}
+
+interface DexData {
+  descriptions: { description: String; language: ApiObject }[];
+  id: Number;
+  is_main_series: boolean;
+  name: String;
+  names: { language: ApiObject; name: String }[];
+  pokemon_entries: PokemonEntry[];
+  region: ApiObject;
+  version_groups: ApiObject[];
+}
+
+const entriesList: PokemonEntry[] = [];
+
+function MonList() {
+  const [dexEntries, setDexEntries] = useState(entriesList);
+
+  useEffect(() => {
+    let retrievedData: boolean = false;
+
+    async function fetchGen1Dex() {
+      const response = await fetch('https://pokeapi.co/api/v2/pokedex/2');
+      const gen1DexData: Promise<DexData> = await response.json();
+      console.log('gen1DexData: ', gen1DexData);
+      const monEntries: PokemonEntry[] = (await gen1DexData).pokemon_entries;
+      console.log('monEntries: ', monEntries);
+
+      if (!retrievedData) {
+        setDexEntries(monEntries);
+      }
+    }
+    fetchGen1Dex();
+    return () => {
+      retrievedData = true;
+    };
+  }, []);
+
   return (
     <>
       <h2>Mon List</h2>
       <ul>
-        {monNames?.map((name) => (
-          <li key={name}>{name}</li>
+        {dexEntries?.map((entry) => (
+          <li key={entry?.entry_number}>{entry.pokemon_species.name}</li>
         ))}
       </ul>
     </>
   );
-};
+}
 
 function App() {
   return (
     <div className="App">
-      <MonList names={nameList} />
+      <MonList />
     </div>
   );
 }
