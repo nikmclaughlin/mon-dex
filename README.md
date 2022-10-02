@@ -2,6 +2,13 @@
 
 **The only dex you need for all your mons**
 
+## Built With
+
+- Vite
+- Typescript
+- Tailwind
+- PokeAPI
+
 **Features [in-progress]**
 
 - SPA-like w/ nested routes
