@@ -51,15 +51,21 @@ function MonList() {
 
   return (
     <>
-      <h2>Mon List</h2>
-      <ul>
+      <h2 className="text-left font-bold">Mon List</h2>
+      <ul className="w-1/3">
         {dexEntries?.map((entry) => (
-          <li key={entry?.entry_number}>
+          <li
+            key={entry?.entry_number}
+            className="border-2 border-red-700 relative h-20 text-sm hover:scale-110 hover:translate-x-6 duration-150"
+          >
             <img
               src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${entry?.entry_number}.png`}
               alt={'image of ' + entry?.pokemon_species?.name}
+              className="border-2 border-black absolute rounded-md inset-y-0 left-0 h-full"
             />
-            <p>{entry?.pokemon_species?.name}</p>
+            <strong className="m-0 text-base">{entry?.pokemon_species?.name}</strong>
+            <p className="m-0">Height:</p>
+            <p className="m-0">Weight:</p>
           </li>
         ))}
       </ul>
