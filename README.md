@@ -6,10 +6,11 @@
 
 - Vite
 - Typescript
+- React
 - Tailwind
 - PokeAPI
 
-**Features [in-progress]**
+## Features [in-progress]
 
 - SPA-like w/ nested routes
 - Dynamic content w/ API integration
