@@ -24,7 +24,7 @@ function MonEntry(entryData: PokemonEntry) {
 }
 /*/
 
-function MonList(props: { selectorFunction: any }) {
+function MonList() {
   const [dexEntries, setDexEntries] = useState(entriesList);
 
   useEffect(() => {

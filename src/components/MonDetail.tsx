@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { PokemonEntry } from '../dexTypes';
+// import { PokemonEntry } from '../dexTypes';
 
 const MonDetail = (props: { activeMon: number }) => {
-  const [currentMon, setCurrentMon] = useState(props.activeMon);
+  const [currentMon] = useState(props.activeMon);
 
   return (
     <>
