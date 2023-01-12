@@ -24,7 +24,7 @@ function MonEntry(entryData: PokemonEntry) {
 }
 /*/
 
-function MonList() {
+function MonList(props: { selectorFunction: any }) {
   const [dexEntries, setDexEntries] = useState(entriesList);
 
   useEffect(() => {
@@ -51,8 +51,8 @@ function MonList() {
 
   return (
     <>
-      <h2 className="text-left font-bold">Mon List</h2>
-      <ul className="w-1/3">
+      {/* <h2 className="text-left font-bold">Mon List</h2> */}
+      <ul className="break-after-column">
         {dexEntries?.map((entry) => (
           <li
             key={entry?.entry_number}
